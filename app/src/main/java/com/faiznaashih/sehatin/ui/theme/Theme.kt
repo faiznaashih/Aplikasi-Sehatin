@@ -14,59 +14,58 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat // Menggunakan WindowCompat yang lebih direkomendasikan
+import androidx.core.view.WindowCompat
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.material3.Text
 
-// =============================================================================
-// DEFINISIKAN COLOR SCHEME BARU DENGAN WARNA DARI Color.kt
-// PASTIKAN WARNA SEPERTI MyPrimaryBlue, MyLightGrayBackground, dll. SUDAH ADA DI Color.kt
-// =============================================================================
-
-// Contoh Light Color Scheme yang dimodifikasi
+// ================================
+// DEFINISI WARNA UNTUK LIGHT MODE
+// ================================
 private val LightColorScheme = lightColorScheme(
-    primary = MyPrimaryBlue, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
-    onPrimary = Color.White, // Warna teks/ikon di atas primary
-    primaryContainer = MyPrimaryBlue.copy(alpha = 0.2f), // Varian warna primary
-    onPrimaryContainer = Color.Black, // Warna teks/ikon di atas primaryContainer
-    secondary = MyAccentGreen, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
-    onSecondary = Color.White, // Warna teks/ikon di atas secondary
-    secondaryContainer = MyAccentGreen.copy(alpha = 0.2f), // Varian warna secondary
-    onSecondaryContainer = Color.Black, // Warna teks/ikon di atas secondaryContainer
-    tertiary = Pink40, // Bisa tetap pakai yang lama atau ganti dengan warna kustom
+    primary = MyPrimaryBlue,
+    onPrimary = Color.White,
+    primaryContainer = MyPrimaryBlue.copy(alpha = 0.2f),
+    onPrimaryContainer = Color.Black,
+    secondary = MyAccentGreen,
+    onSecondary = Color.White,
+    secondaryContainer = MyAccentGreen.copy(alpha = 0.2f),
+    onSecondaryContainer = Color.Black,
+    tertiary = Pink40,
     onTertiary = Color.White,
     tertiaryContainer = Pink40.copy(alpha = 0.2f),
     onTertiaryContainer = Color.Black,
-    background = MyLightGrayBackground, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
-    onBackground = Color.Black, // Warna teks/ikon di atas background
-    surface = MyLightGrayBackground, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
-    onSurface = Color.Black, // Warna teks/ikon di atas surface
-    surfaceVariant = Color.LightGray, // Varian warna surface
-    onSurfaceVariant = Color.DarkGray, // Warna teks/ikon di atas surfaceVariant
-    error = Color.Red, // Warna untuk error
+    background = MyLightGrayBackground,
+    onBackground = Color.Black,
+    surface = MyLightGrayBackground,
+    onSurface = Color.Black,
+    surfaceVariant = Color.LightGray,
+    onSurfaceVariant = Color.DarkGray,
+    error = Color.Red,
     onError = Color.White,
     errorContainer = Color.Red.copy(alpha = 0.2f),
     onErrorContainer = Color.Black,
-    outline = Color.Gray, // Warna untuk outline elemen
-    // Tambahkan properti warna lainnya sesuai kebutuhan Material Design 3
+    outline = Color.Gray
 )
 
-// Contoh Dark Color Scheme yang dimodifikasi
+// ================================
+// DEFINISI WARNA UNTUK DARK MODE
+// ================================
 private val DarkColorScheme = darkColorScheme(
-    primary = MyPrimaryBlue, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
+    primary = MyPrimaryBlue,
     onPrimary = Color.Black,
     primaryContainer = MyPrimaryBlue.copy(alpha = 0.4f),
     onPrimaryContainer = Color.White,
-    secondary = MyAccentGreen, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
+    secondary = MyAccentGreen,
     onSecondary = Color.Black,
     secondaryContainer = MyAccentGreen.copy(alpha = 0.4f),
     onSecondaryContainer = Color.White,
-    tertiary = Pink80, // Bisa tetap pakai yang lama atau ganti dengan warna kustom
+    tertiary = Pink80,
     onTertiary = Color.Black,
     tertiaryContainer = Pink80.copy(alpha = 0.4f),
     onTertiaryContainer = Color.White,
-    background = MyDarkGrayBackground, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
+    background = MyDarkGrayBackground,
     onBackground = Color.White,
-    surface = MyDarkGrayBackground, // Menggunakan warna kustom baru (pastikan ada di Color.kt)
+    surface = MyDarkGrayBackground,
     onSurface = Color.White,
     surfaceVariant = Color(0xFF424242),
     onSurfaceVariant = Color.LightGray,
@@ -74,17 +73,16 @@ private val DarkColorScheme = darkColorScheme(
     onError = Color.Black,
     errorContainer = Color.Red.copy(alpha = 0.4f),
     onErrorContainer = Color.White,
-    outline = Color.DarkGray,
-    // Tambahkan properti warna lainnya sesuai kebutuhan Material Design 3
+    outline = Color.DarkGray
 )
-// =============================================================================
 
-
+// ================================
+// THEME UTAMA APLIKASI
+// ================================
 @Composable
 fun DoseAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available only on Android 12+
-    dynamicColor: Boolean = true, // Ubah ke false jika tidak ingin dynamic color
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -95,19 +93,30 @@ fun DoseAppTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            // Menggunakan WindowCompat untuk kontrol status bar yang lebih baik
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography, // Pastikan Typography sudah didefinisikan di Type.kt
+        typography = Typography,
         content = content
     )
+}
+
+// ================================
+// PREVIEW UNTUK COMPOSE PREVIEW
+// ================================
+@Preview(showBackground = true)
+@Composable
+fun PreviewDoseAppTheme() {
+    DoseAppTheme {
+        Text("Halo dari Preview!")
+    }
 }

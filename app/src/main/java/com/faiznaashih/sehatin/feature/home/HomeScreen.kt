@@ -65,6 +65,10 @@ import com.waseefakhtar.doseapp.feature.home.viewmodel.HomeState
 import com.waseefakhtar.doseapp.feature.home.viewmodel.HomeViewModel
 import java.util.Calendar
 import java.util.Date
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.waseefakhtar.doseapp.ui.theme.DoseAppTheme
+
 
 @Composable
 fun HomeRoute(
@@ -592,5 +596,26 @@ fun PermissionAlarmDialog(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHomeScreen() {
+    val dummyState = HomeState(
+        medications = emptyList(),
+        lastSelectedDate = ""
+    )
+
+    DoseAppTheme {
+        HomeScreen(
+            modifier = Modifier,
+            navController = rememberNavController(),
+            state = dummyState,
+            navigateToMedicationDetail = {},
+            onDateSelected = {},
+            onSelectedDate = {},
+            logEvent = {}
+        )
     }
 }

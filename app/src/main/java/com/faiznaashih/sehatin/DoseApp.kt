@@ -226,7 +226,8 @@ fun DoseFAB(navController: NavController, analyticsHelper: AnalyticsHelper) {
             navController.navigate(AddMedicationDestination.route)
         },
         elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp),
-        containerColor = MaterialTheme.colorScheme.tertiary
+        containerColor = MaterialTheme.colorScheme.primary //kalo pengen ganti warna kotak add medication
+                                                            //liat ke theme.kt
     )
 }
 
