@@ -183,6 +183,24 @@ private fun DoseBottomBar(
     }
 }
 
+
+@Preview(showBackground = true, name = "Bottom Bar Preview")
+@Composable
+fun DoseBottomBarPreview() {
+    DoseAppTheme {
+        // Untuk preview, kita perlu menyediakan dummy NavDestination dan AnalyticsHelper
+        val dummyNavController = rememberNavController()
+        val dummyAnalyticsHelper = AnalyticsHelper(LocalContext.current)
+        DoseBottomBar(
+            onNavigateToTopLevelDestination = {},
+            currentDestination = dummyNavController.currentDestination, // Bisa juga dummy NavDestination
+            analyticsHelper = dummyAnalyticsHelper
+        )
+    }
+}
+// =============================================================================
+
+
 private fun trackTabClicked(analyticsHelper: AnalyticsHelper, route: String) {
     if (route == HomeDestination.route) {
         analyticsHelper.logEvent(AnalyticsEvents.HOME_TAB_CLICKED)
@@ -211,6 +229,22 @@ fun DoseFAB(navController: NavController, analyticsHelper: AnalyticsHelper) {
         containerColor = MaterialTheme.colorScheme.tertiary
     )
 }
+
+// =============================================================================
+// TEMPATKAN KODE @Preview UNTUK DoseFAB() DI SINI
+// =============================================================================
+@Preview(showBackground = true, name = "FAB Preview")
+@Composable
+fun DoseFABPreview() {
+    DoseAppTheme {
+        // Untuk preview, kita perlu menyediakan dummy NavController dan AnalyticsHelper
+        val dummyNavController = rememberNavController()
+        val dummyAnalyticsHelper = AnalyticsHelper(LocalContext.current)
+        DoseFAB(navController = dummyNavController, analyticsHelper = dummyAnalyticsHelper)
+    }
+}
+// =============================================================================
+
 
 @Preview(showBackground = true)
 @Composable
