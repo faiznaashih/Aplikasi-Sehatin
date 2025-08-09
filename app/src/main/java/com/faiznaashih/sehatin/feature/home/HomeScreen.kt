@@ -395,7 +395,7 @@ fun DateItem(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colorScheme.outline
+            color = MaterialTheme.colorScheme.primary // kalo pengen ganti warna text hari
         )
         Card(
             modifier = Modifier
@@ -405,7 +405,7 @@ fun DateItem(
                 // background colors of the selected date
                 // and the non-selected date are different
                 containerColor = if (date.isSelected) {
-                    MaterialTheme.colorScheme.tertiary
+                    MaterialTheme.colorScheme.primary // kalo pengen ganti warna kotak tanggal
                 } else {
                     MaterialTheme.colorScheme.surface
                 }
@@ -454,7 +454,7 @@ fun DateHeader(
             },
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.primary
         )
         IconButton(onClick = {
             onPrevClickListener(data.startDate.date)

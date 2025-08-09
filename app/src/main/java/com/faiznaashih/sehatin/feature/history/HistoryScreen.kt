@@ -119,6 +119,7 @@ fun MedicationLazyColumn(sortedMedicationList: List<MedicationListItem>, navigat
                             }
                         )
                     }
+                    else ->{}
                 }
             }
         )
@@ -138,7 +139,7 @@ fun EmptyView() {
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.headlineMedium,
             text = stringResource(id = R.string.no_history_yet),
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
